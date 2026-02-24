@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+  <title>JSON Viewer Pro</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>JSON Viewer Pro</h1>
+    </header>
+    <main id="main">
+      <label class="toggle-row">
+        <span>Enable JSON formatting</span>
+        <input type="checkbox" id="enabled" checked>
+      </label>
+      <div class="theme-row">
+        <span>Theme</span>
+        <select id="theme">
+          <option value="auto">Auto (system)</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <p class="hint">Reload the page after changing settings.</p>
+    </main>
+    <footer>
+      <span class="version">v0.1.0</span>
+      <a href="#" id="options-link">More Settings</a>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

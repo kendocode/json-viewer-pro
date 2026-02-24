@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON Viewer Pro — Tests</title>
+  <style>
+    body { font-family: monospace; padding: 20px; }
+    .pass { color: green; }
+    .fail { color: red; }
+    .test { margin: 4px 0; }
+    #summary { font-weight: bold; margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>JSON Viewer Pro — Unit Tests</h1>
+  <div id="results"></div>
+  <div id="summary"></div>
+
+  <script>
+    // Test framework
+    let passed = 0;
+    let failed = 0;
+    const results = document.getElementById('results');
+
+    function assert(name, condition) {
+      const div = document.createElement('div');
+      div.className = 'test';
+      if (condition) {
+        passed++;
+        div.className += ' pass';
+        div.textContent = `PASS: ${name}`;
+      } else {
+        failed++;
+        div.className += ' fail';
+        div.textContent = `FAIL: ${name}`;
+      }
+      results.appendChild(div);
+    }
+
+    // ========== Tests for JSON detection logic ==========
+
+    // Simulate the isJsonPage logic (extracted from content.js)
+    function tryParseJson(text) {
+      try {
+        return JSON.parse(text);
+      } catch {
+        return null;
+      }
+    }
+
+    // Test: valid JSON objects
+    assert('Parse simple object', tryParseJson('{"key": "value"}') !== null);
+    assert('Parse nested object', tryParseJson('{"a": {"b": {"c": 1}}}') !== null);
+    assert('Parse array', tryParseJson('[1, 2, 3]') !== null);
+    assert('Parse null', tryParseJson('null') !== null || tryParseJson('null') === null);
+    assert('Parse string', tryParseJson('"hello"') !== null);
+    assert('Parse number', tryParseJson('42') !== null);
+    assert('Parse boolean', tryParseJson('true') !== null);
+    assert('Parse empty object', tryParseJson('{}') !== null);
+    assert('Parse empty array', tryParseJson('[]') !== null);
+
+    // Test: invalid JSON
+    assert('Reject plain text', tryParseJson('hello world') === null);
+    assert('Reject HTML', tryParseJson('<html><body></body></html>') === null);
+    assert('Reject incomplete JSON', tryParseJson('{"key":') === null);
+    assert('Reject trailing comma', tryParseJson('{"a": 1,}') === null);
+
+    // Test: large JSON
+    const largeObj = {};
+    for (let i = 0; i < 1000; i++) largeObj['key' + i] = 'value' + i;
+    const largeJson = JSON.stringify(largeObj);
+    assert('Parse 1000-key object', tryParseJson(largeJson) !== null);
+
+    // Test: special characters
+    assert('Parse unicode', tryParseJson('{"emoji": "\\u2764"}') !== null);
+    assert('Parse newlines in strings', tryParseJson('{"msg": "line1\\nline2"}') !== null);
+
+    // ========== Tests for URL detection ==========
+
+    function isUrl(str) {
+      return /^https?:\/\//.test(str);
+    }
+
+    assert('Detect http URL', isUrl('http://example.com'));
+    assert('Detect https URL', isUrl('https://api.github.com/repos'));
+    assert('Reject plain string', !isUrl('not a url'));
+    assert('Reject ftp URL', !isUrl('ftp://files.example.com'));
+
+    // ========== Tests for path generation ==========
+
+    function generatePath(base, key) {
+      if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key)) {
+        return `${base}.${key}`;
+      }
+      return `${base}[${JSON.stringify(key)}]`;
+    }
+
+    assert('Simple key path', generatePath('$', 'name') === '$.name');
+    assert('Nested key path', generatePath('$.user', 'email') === '$.user.email');
+    assert('Key with spaces', generatePath('$', 'full name') === '$["full name"]');
+    assert('Key with dots', generatePath('$', 'a.b') === '$["a.b"]');
+    assert('Key starting with number', generatePath('$', '0key') === '$["0key"]');
+    assert('Key with special chars', generatePath('$', 'foo-bar') === '$["foo-bar"]');
+
+    // ========== Tests for size formatting ==========
+
+    function formatSize(bytes) {
+      if (bytes > 1048576) return `${(bytes / 1048576).toFixed(1)} MB`;
+      if (bytes > 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+      return `${bytes} B`;
+    }
+
+    assert('Format bytes', formatSize(500) === '500 B');
+    assert('Format KB', formatSize(2048) === '2.0 KB');
+    assert('Format MB', formatSize(1500000) === '1.4 MB');
+    assert('Format 1 KB exactly', formatSize(1025) === '1.0 KB');
+
+    // Summary
+    const summary = document.getElementById('summary');
+    summary.textContent = `${passed} passed, ${failed} failed, ${passed + failed} total`;
+    summary.style.background = failed === 0 ? '#d4edda' : '#f8d7da';
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="options.css">
+  <title>JSON Viewer Pro — Settings</title>
+</head>
+<body>
+  <div class="container">
+    <h1>JSON Viewer Pro Settings</h1>
+
+    <div class="setting-group">
+      <label class="setting">
+        <input type="checkbox" id="enabled" checked>
+        <span>Enable JSON formatting</span>
+      </label>
+      <p class="setting-desc">When enabled, JSON responses are automatically formatted with a tree view.</p>
+    </div>
+
+    <div class="setting-group">
+      <label class="setting-label">Theme</label>
+      <select id="theme">
+        <option value="auto">Auto (follow system)</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button id="save" class="btn btn-primary">Save</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <div class="about">
+      <h2>About</h2>
+      <p>JSON Viewer Pro formats JSON responses in your browser with a clean, collapsible tree view.</p>
+      <ul>
+        <li>No ads, no tracking, no donation popups</li>
+        <li>Automatic JSON detection</li>
+        <li>Search keys and values</li>
+        <li>Copy values and paths</li>
+        <li>Light and dark themes</li>
+        <li>URL detection and linking</li>
+      </ul>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
