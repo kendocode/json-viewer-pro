@@ -31,3 +31,4 @@ node tests/test-core.mjs
 - Version: semver starting at 0.x (1.x = production-ready)
 - All user-facing strings in HTML, not JS
 - Privacy policy must be kept current with any permission changes
+- Do NOT add Claude/AI as co-author or contributor in commits, PRs, or code
