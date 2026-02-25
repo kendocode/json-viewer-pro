@@ -15,15 +15,20 @@ Clean, fast JSON viewer for Chrome. Automatically detects and formats JSON respo
 
 ## Installation
 
-### From Chrome Web Store (coming soon)
-1. Install from the Chrome Web Store
-2. Navigate to any JSON URL (e.g., a REST API endpoint)
-3. JSON is automatically formatted
+### From Chrome Web Store
+*Coming soon*
 
-### Local Development
-1. Open `chrome://extensions/`
-2. Enable "Developer mode" (toggle in top right)
-3. Click "Load unpacked" and select this directory
+### From GitHub Release
+1. Download the latest `json-viewer-pro.zip` from [Releases](https://github.com/kendocode/json-viewer-pro/releases)
+2. Unzip into a folder
+3. Open `chrome://extensions/` and enable "Developer mode"
+4. Click "Load unpacked" and select the unzipped folder
+5. Navigate to any JSON URL — it's automatically formatted
+
+### From Source
+1. Clone this repo
+2. Open `chrome://extensions/` and enable "Developer mode"
+3. Click "Load unpacked" and select the repo directory
 4. Navigate to any JSON URL to test
 
 ## Testing
@@ -46,10 +51,10 @@ This extension:
 
 ## Store Listing Copy
 
-### Title (max 45 chars)
+### Title
 JSON Viewer Pro
 
-### Short Description (max 132 chars)
+### Short Description
 Clean, fast JSON viewer with tree view, search, and syntax highlighting. No ads, no tracking, no popups.
 
 ### Detailed Description
