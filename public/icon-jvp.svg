@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Blue rounded square background -->
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#3B82F6"/>
+
+  <!-- Filled left curly brace { -->
+  <path d="M38,30 C38,30 28,30 28,40 L28,55 C28,58 22,62 22,64 C22,66 28,70 28,73 L28,88 C28,98 38,98 38,98 L38,92 C38,92 34,92 34,88 L34,72 C34,68 28,66 28,64 C28,62 34,60 34,56 L34,40 C34,36 38,36 38,36 Z" fill="#FFFFFF"/>
+
+  <!-- Tree branches extending right -->
+  <!-- Top branch -->
+  <rect x="48" y="41" width="30" height="6" rx="3" fill="#FFFFFF"/>
+  <circle cx="84" cy="44" r="7" fill="#DBEAFE"/>
+
+  <!-- Middle branch (longer) -->
+  <rect x="48" y="61" width="42" height="6" rx="3" fill="#FFFFFF"/>
+  <circle cx="96" cy="64" r="7" fill="#DBEAFE"/>
+
+  <!-- Bottom branch -->
+  <rect x="48" y="81" width="24" height="6" rx="3" fill="#FFFFFF"/>
+  <circle cx="78" cy="84" r="7" fill="#DBEAFE"/>
+</svg>
